@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SNS of Sapphiku</title>
-    <meta name="description" content="The digital artist situation is crazy." />
+    <meta name="description" content="The digital artist situation is crazy." /> <!-- yes this is a common ball ref to Charlie-->
 
     <meta property="og:title" content="SNS of Sapphiku" />
     <meta
@@ -25,476 +25,531 @@
     <meta name="twitter:image" content="/host/extr/pfpfp.png" />
 
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
-
-      @font-face {
-        font-family: "Splat";
-        src: url("https://raw.githubusercontent.com/North-West-Wind/splatoon3-fonts/refs/heads/main/Decrypted/BlitzBold.otf");
-      }
-
-      @font-face {
-        font-family: "Toon";
-        src: url("https://raw.githubusercontent.com/North-West-Wind/splatoon3-fonts/refs/heads/main/Decrypted/AsiaKERIN-M.ttf");
-      }
-
-      :root {
-        --bg-body: #000;
-        --soap: #18031f;
-        --soapclr: #3f324f;
-        --marzilogue: rgba(20, 20, 20, 0.98);
-        --marzilogue-name: #000000;
-        --saph-usr-color: var(--saph-purple);
-        --saph-usr-mid: rgba(98, 58, 130, 0.54);
-        --saph-usr-transparent: rgba(0, 0, 0, 0);
-        --marzilogue-border: #333333;
-        --txt-color: #ffffff;
-        --txt-alt-color: #dddddd;
-        --saph-purple: #a93cff;
-      }
-
-      html {
-        min-height: 100%;
-        background-color: var(--bg-body);
-        background-image: url("/host/sns/germ.png");
-        background-repeat: repeat;
-        background-position: top left;
-        background-size: 480px auto;
-        background-attachment: fixed;
-        color: var(--txt-color);
-        font-family: "Toon", system-ui, -apple-system, sans-serif;
-        margin: 0;
-      }
-
-      body {
-        min-height: 100vh;
-        padding: 2rem 1rem 10rem 1rem;
-      }
-
-      .box {
-        background-color: var(--soap);
-        max-width: 480px;
-        margin: 0 auto;
-        border-radius: 9px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-      }
-
-      .profile {
-        width: 100%;
-        position: relative;
-      }
-
-      .profile img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      .profile::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          var(--saph-usr-transparent) 65%,
-          var(--saph-usr-mid) 85%,
-          var(--saph-usr-color) 100%
-        );
-        pointer-events: none;
-      }
-
-      .profile-info {
-        position: absolute;
-        bottom: 0px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        width: 90%;
-        z-index: 2;
-      }
-
-      .profile-info .name {
-        font-size: 2em;
-        font-weight: 700;
-        margin: 0;
-        color: var(--txt-color);
-        font-family: "Splat", sans-serif;
-      }
-
-      .profile-info .bio {
-        font-size: 1.15em;
-        color: var(--txt-alt-color);
-        margin-top: 4px;
-      }
-
-      .social {
-        padding: 1.75em;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .snbox {
-        background-color: var(--soapclr);
-        padding: 14px 1.25em;
-        border-radius: 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 1em;
-        cursor: pointer;
-        transition: background 0.2s, outline 0.1s;
-        text-decoration: none;
-        color: inherit;
-        border: 0;
-        width: 100%;
-        box-sizing: border-box;
-        text-align: left;
-        font-family: inherit;
-        font-size: 100%;
-        -webkit-tap-highlight-color: transparent;
-        min-height: 58px;
-        vertical-align: middle;
-      }
-
-      button.snbox {
-        appearance: none;
-        -webkit-appearance: none;
-        margin: 0;
-        line-height: normal;
-      }
-
-      .snbox:focus-visible {
-        outline: 2px solid var(--txt-color);
-        outline-offset: 2px;
-      }
-
-      .snbox img {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-        display: block;
-        object-fit: contain;
-        align-self: center;
-        vertical-align: middle;
-        border: 0;
-      }
-
-      .text {
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 1;
-        display: inline-flex;
-        align-items: center;
-        margin: 0;
-        padding-top: 2px;
-      }
-
-      .splatbox {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 95%;
-        max-width: 600px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        z-index: 100;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.25s ease, visibility 0.25s ease;
-        pointer-events: none;
-      }
-
-      .splatbox.show {
-        visibility: visible;
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .splatbox .whoami {
-        background: var(--marzilogue-name);
-        color: var(--saph-purple);
-        display: inline-block;
-        padding: 1px 30px;
-        font-size: 1.4em;
-        min-width: 120px;
-        text-align: center;
-        font-family: "Splat", sans-serif;
-        border-radius: 10px 10px 0 0;
-        border-bottom: 4px dashed var(--txt-color);
-        margin-left: 0;
-        margin-bottom: -5px;
-        position: relative;
-        z-index: 2;
-      }
-
-      .splatbox .watmsg {
-        background: var(--marzilogue);
-        padding: 20px;
-        display: flex;
-        gap: 20px;
-        align-items: center;
-        border-radius: 0px 15px 30px 15px;
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        box-sizing: border-box;
-        border: 1px solid var(--marzilogue-border);
-      }
-
-      .splatbox .profile-icon img {
-        width: 80px;
-        height: auto;
-        background: transparent;
-        display: block;
-        transform: translateY(-2px);
-      }
-
-      .splatbox .text-message {
-        line-height: 1.4;
-        font-size: 1rem;
-        overflow-wrap: anywhere;
-      }
-
-      .splatbox .text-message p {
-        margin: 0 0 8px 0;
-      }
-
-      .splatbox .text-message p:last-child {
-        margin-bottom: 0;
-      }
-
-      @media (max-width: 600px) {
-        .splatbox .watmsg {
-          flex-direction: column;
-          text-align: center;
-          padding: 15px;
+        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+        @font-face {
+            font-family: "Splat";
+            src: url("https://raw.githubusercontent.com/North-West-Wind/splatoon3-fonts/refs/heads/main/Decrypted/BlitzBold.otf");
         }
-        .splatbox {
-          align-items: center;
+        @font-face {
+            font-family: "Toon";
+            src: url("https://raw.githubusercontent.com/North-West-Wind/splatoon3-fonts/refs/heads/main/Decrypted/AsiaKERIN-M.ttf");
         }
-        .splatbox .whoami {
-          font-size: 1.2em;
-          min-width: 100px;
+        :root {
+            --mz_a: #000;
+            --mz_b: #18080d;
+            --mz_c: #c50344;
+            --mz_d: #c0c0c0;
+            --mz_e: #ff667a;
+            --mz_f: #ffb3b9;
+            --mz_g: transparent;
+            --mz_h: #ab00fa;
+            --mz_i: #b95628;
+            --mz_j: #f51962;
+            --mz_k: #372b3a;
+            --mz_l: #270414;
+            --mz_m: rgba(20, 20, 20, 0.98);
+            --mz_n: #000000;
+            --mz_o: #333333;
+            --mz_p: #ffffff;
+            --mz_q: #dddddd;
         }
-      }
-
-      @media (max-width: 480px) {
+        html {
+            min-height: 100%;
+            background-color: var(--mz_a);
+            background-image: url("wa;;paper.png");
+            background-repeat: repeat;
+            background-position: top left;
+            background-size: 480px auto;
+            background-attachment: fixed;
+            color: var(--mz_d);
+            font-family: "Toon", system-ui, -apple-system, sans-serif;
+            margin: 0;
+        }
         body {
-          padding: 0.75rem 0.75rem 8.75rem 0.75rem;
+            min-height: 100vh;
+            padding: 2rem 1rem 10rem 1rem;
+            margin: 0;
+            box-sizing: border-box;
         }
-        .box {
-          width: 100%;
+        .parental {
+            width: 990px;
+            max-width: 100%;
+            margin: 0 auto;
+            background: var(--mz_b);
+            border: 2px solid var(--mz_c);
+            padding: 12px;
+            display: flex;
+            gap: 12px;
+            box-sizing: border-box;
         }
-        .social {
-          padding: 1.1em;
-          gap: 0.7em;
+        .left-side {
+            width: 360px;
+            flex-shrink: 0;
+            background: transparent;
+            border: 1px solid var(--mz_c);
+            padding-bottom: 18px;
+            position: relative;
+        }
+        .right-side {
+            width: 532px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .discord-banner {
+            height: 104px;
+            background-color: transparent;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .profile {
+            position: relative;
+            margin-top: -50px;
+            padding-left: 18px;
+            margin-bottom: 10px;
+        }
+        .profile img {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            box-sizing: content-box;
+            object-fit: cover;
+            display: block;
+        }
+        .uust {
+            position: absolute;
+            bottom: 0px;
+            left: 86px;
+            width: 18px;
+            height: 18px;
+            background-color: var(--mz_k);
+            border: 3px solid var(--mz_c);
+            border-radius: 50%;
+        }
+        .uupf {
+            display: none;
+        }
+        #uud {
+            font-size: 23px;
+            color: #fff;
+            margin: 0 18px 4px 18px;
+            font-weight: bold;
+            font-family: "Splat", sans-serif;
+        }
+        #uud span {
+            color: red;
+        }
+        #uun {
+            font-size: 14px;
+            color: var(--mz_f);
+            margin: 0 18px 14px 18px;
+            font-weight: normal;
+        }
+        .uub {
+            background: #0d001a;
+            border: 1px solid var(--mz_c);
+            margin: 0 18px;
+            padding: 12px;
+            font-size: 12px;
+            color: #e0e0e0;
+            word-break: break-word;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .uua {
+            background: #0d001a;
+            border: 1px solid var(--mz_c);
+            margin: 12px 18px 0 18px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--mz_p);
+        }
+        .uua span.star {
+            color: var(--mz_f);
+            font-size: 15px;
+            user-select: none;
+        }
+        .uua .email-action, .uua .refresh-action {
+            cursor: pointer;
+            color: var(--mz_f);
+            transition: color 0.2s;
+        }
+        .uua .email-action:hover, .uua .refresh-action:hover {
+            color: var(--mz_p);
+            text-decoration: underline;
+        }
+        .status-emoji {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            vertical-align: middle;
+            display: inline-block;
+        }
+        .uuwid {
+            background-color: transparent;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--mz_c);
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        .uutrw h2, .left-side h2 {
+            font-size: 15px;
+            color: var(--mz_f);
+            margin-top: 0;
+            border-bottom: 2px dashed var(--mz_c);
+            padding-bottom: 4px;
+        }
+        .uutrw p {
+            font-size: 12px;
+            color: #e0e0e0;
+            margin-bottom: 0;
+        }
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 9px;
+            margin-top: 9px;
         }
         .snbox {
-          padding: 0.9em 1em;
-          min-height: 3.25rem;
+            background-color: var(--mz_l);
+            padding: 9px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--mz_p);
+            border: 0;
+            box-sizing: border-box;
+            font-family: inherit;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s, outline 0.1s;
+        }
+        .snbox:focus-visible {
+            outline: 2px solid var(--mz_p);
+            outline-offset: 2px;
         }
         .snbox img {
-          width: 28px;
-          height: 28px;
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+            object-fit: contain;
+            flex-shrink: 0;
         }
-        .text {
-          font-size: 18px;
+        .snbox-content {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .snbox .text {
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .snbox .subtext {
+            font-size: 12px;
+            color: var(--mz_f);
+            line-height: 1.2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .splatbox {
-          bottom: 0.75rem;
-          width: calc(100% - 1.5rem);
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 100;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            pointer-events: none;
+        }
+        .splatbox.show {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .splatbox .whoami {
+            background: var(--mz_n);
+            color: var(--mz_e);
+            display: inline-block;
+            padding: 1px 30px;
+            font-size: 1.4em;
+            min-width: 120px;
+            text-align: center;
+            font-family: "Splat", sans-serif;
+            border-radius: 10px 10px 0 0;
+            border-bottom: 4px dashed var(--mz_p);
+            margin-left: 0;
+            margin-bottom: -5px;
+            position: relative;
+            z-index: 2;
+        }
+        .splatbox .watmsg {
+            background: var(--mz_m);
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border-radius: 0px 15px 30px 15px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid var(--mz_o);
+            color: var(--mz_p);
         }
         .splatbox .profile-icon img {
-          width: 4rem;
+            width: 80px;
+            height: auto;
+            background: transparent;
+            display: block;
+            transform: translateY(-2px);
         }
-      }
+        .splatbox .text-message {
+            line-height: 1.4;
+            font-size: 1rem;
+            overflow-wrap: anywhere;
+        }
+        .splatbox .text-message p {
+            margin: 0;
+        }
+        @media (max-width: 850px) {
+            .parental {
+                width: 100%;
+                flex-direction: column;
+            }
+            .left-side, .right-side {
+                width: 100%;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <main class="box">
-      <header class="profile">
-        <img
-          alt="my profile picture"
-          src="/host/extr/pfpfp.png"
-        />
-        <div class="profile-info">
-          <h1 class="name">Sapphiku</h1>
-          <p class="bio">To exist and not exist.</p>
+</head>
+<body>
+    <div class="parental">
+        <div class="left-side">
+            <div id="discord-banner" class="discord-banner"></div>
+            <div class="profile">
+                <div class="uupf"></div>
+                <img id="discord-pfp" alt="my pfp">
+                <div id="discord-status-dot" class="uust"></div>
+            </div>
+            <h1 id="uud">Marzípan</h1>
+            <h2 id="uun">@Sapphiku &bull; they/them</h2>
+            <div id="discord-bio" class="uub"></div>
+            <div class="uua">
+                <span class="email-action" id="btn-email-left">Email</span>
+                <span class="star">&star;</span>
+                <span class="refresh-action" id="btn-refresh">Refresh</span>
+            </div>
         </div>
-      </header>
-
-      <nav class="social" aria-label="my socials">
-        <a
-          href="https://sapphiku.nekoweb.org"
-          target="_blank"
-          rel="noopener"
-          class="snbox"
-          data-name="Main Website"
-        >
-          <img src="/host/extr/squid.png" alt="" aria-hidden="true" />
-          <span class="text">Main Website</span>
-        </a>
-
-        <a
-          href="https://twitter.com/Sapphiku"
-          target="_blank"
-          rel="noopener"
-          class="snbox"
-          data-name="Twitter"
-        >
-          <img
-            src="https://s.magecdn.com/social/mw-twitter.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <span class="text">Twitter</span>
-        </a>
-
-        <a
-          href="https://www.instagram.com/sapphik.u/"
-          target="_blank"
-          rel="noopener"
-          class="snbox"
-          data-name="Instagram"
-        >
-          <img
-            src="https://s.magecdn.com/social/mw-instagram.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <span class="text">Instagram</span>
-        </a>
-
-        <button
-          type="button"
-          class="snbox"
-          id="btn-discord"
-          aria-label="Copy Username"
-        >
-          <img
-            src="https://s.magecdn.com/social/mw-discord.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <span class="text">Discord</span>
-        </button>
-
-        <a
-          href="https://pinterest.com/Sapphiku"
-          target="_blank"
-          rel="noopener"
-          class="snbox"
-          data-name="Pinterest"
-        >
-          <img
-            src="https://s.magecdn.com/social/mw-pinterest.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <span class="text">Pinterest</span>
-        </a>
-
-        <a
-          href="https://youtube.com/@Sapphiku"
-          target="_blank"
-          rel="noopener"
-          class="snbox"
-          data-name="YouTube"
-        >
-          <img
-            src="https://s.magecdn.com/social/mw-youtube.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <span class="text">YouTube</span>
-        </a>
-
-        <a
-          href="https://witchsky.app/profile/sapphiku.nekoweb.org"
-          target="_blank"
-          rel="noopener"
-          class="snbox"
-          data-name="Bluesky"
-        >
-          <img
-            src="https://cdn.simpleicons.org/bluesky/ffffff"
-            alt=""
-            aria-hidden="true"
-          />
-          <span class="text">Bluesky</span>
-        </a>
-
-        <button
-          type="button"
-          class="snbox"
-          id="btn-email"
-          aria-label="Copy Email Address"
-        >
-          <img
-            src="https://cdn.simpleicons.org/gmail/ffffff"
-            alt=""
-            aria-hidden="true"
-          />
-          <span class="text">Email</span>
-        </button>
-      </nav>
-    </main>
-
-    <div id="splatbx" class="splatbox" role="message" aria-live="polite">
-      <div class="whoami">Marzí</div>
-      <div class="watmsg">
-        <div class="profile-icon">
-          <img
-            src="https://64.media.tumblr.com/fb9dd4c50d71633768cb66d52ca062c3/24eeb89c5d3dbb09-13/s500x750/37ef49f0802b2d3ec5ed7d3e7437e1b11b9a80aa.pnj"
-            alt="marzi's icon"
-          />
+        <div class="right-side">
+            <div class="uuwid">
+                <div class="uutrw">
+                    <h2>Project Calamares</h2>
+                    <p>to exist and not exist. i am Marzí. I might probably like the purple colour, draw, and lub the sea alot.</p>
+                </div>
+            </div>
+            <div class="uuwid">
+                <div class="uutrw">
+                    <h2>My Socials</h2>
+                    <div class="social-grid">
+                        <a href="https://sapphiku.nekoweb.org" target="_blank" rel="noopener" class="snbox" data-name="Main Website">
+                            <img src="/host/extr/squid.png" alt="" aria-hidden="true">
+                            <div class="snbox-content">
+                                <span class="text">Website</span>
+                                <span class="subtext">sapphiku</span>
+                            </div>
+                        </a>
+                        <a href="https://twitter.com/Sapphiku" target="_blank" rel="noopener" class="snbox" data-name="Twitter">
+                            <img src="https://s.magecdn.com/social/mw-twitter.svg" alt="" aria-hidden="true">
+                            <div class="snbox-content">
+                                <span class="text">Twitter</span>
+                                <span class="subtext">@Sapphiku</span>
+                            </div>
+                        </a>
+                        <a href="https://www.instagram.com/sapphik.u/" target="_blank" rel="noopener" class="snbox" data-name="Instagram">
+                            <img src="https://s.magecdn.com/social/mw-instagram.svg" alt="" aria-hidden="true">
+                            <div class="snbox-content">
+                                <span class="text">Instagram</span>
+                                <span class="subtext">@sapphik.u</span>
+                            </div>
+                        </a>
+                        <button type="button" class="snbox" id="btn-discord" aria-label="Copy Username">
+                            <img src="https://s.magecdn.com/social/mw-discord.svg" alt="" aria-hidden="true">
+                            <div class="snbox-content">
+                                <span class="text">Discord</span>
+                                <span class="subtext">sapphiku</span>
+                            </div>
+                        </button>
+                        <a href="https://pinterest.com/Sapphiku" target="_blank" rel="noopener" class="snbox" data-name="Pinterest">
+                            <img src="https://s.magecdn.com/social/mw-pinterest.svg" alt="" aria-hidden="true">
+                            <div class="snbox-content">
+                                <span class="text">Pinterest</span>
+                                <span class="subtext">Sapphiku</span>
+                            </div>
+                        </a>
+                        <a href="https://youtube.com/@Sapphiku" target="_blank" rel="noopener" class="snbox" data-name="YouTube">
+                            <img src="https://s.magecdn.com/social/mw-youtube.svg" alt="" aria-hidden="true">
+                            <div class="snbox-content">
+                                <span class="text">YouTube</span>
+                                <span class="subtext">@Sapphiku</span>
+                            </div>
+                        </a>
+                        <a href="https://witchsky.app/profile/sapphiku.nekoweb.org" target="_blank" rel="noopener" class="snbox" data-name="Bluesky">
+                            <img src="https://cdn.simpleicons.org/bluesky/ffffff" alt="" aria-hidden="true">
+                            <div class="snbox-content">
+                                <span class="text">Bluesky</span>
+                                <span class="subtext">sapphiku</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="text-message">
-          <p id="typed-text"></p>
-        </div>
-      </div>
     </div>
-
+    <div id="splatbx" class="splatbox" role="message" aria-live="polite">
+        <div class="whoami">Marzí</div>
+        <div class="watmsg">
+            <div class="profile-icon">
+                <img src="https://64.media.tumblr.com/fb9dd4c50d71633768cb66d52ca062c3/24eeb89c5d3dbb09-13/s500x750/37ef49f0802b2d3ec5ed7d3e7437e1b11b9a80aa.pnj" alt="marzi's icon">
+            </div>
+            <div class="text-message">
+                <p id="typed-text"></p>
+            </div>
+        </div>
+    </div>
     <script>
-      let t, y;
-      const $ = i => document.getElementById(i),
-        c = x => navigator.clipboard.writeText(x),
-        r = () => { clearTimeout(t); t = setTimeout(() => $("splatbx").classList.remove("show"), 4600); },
-        s = (m, k) => {
-          const b = $("splatbx"), e = $("typed-text");
-          clearTimeout(t); clearInterval(y);
-          b.classList.add("show"); e.replaceChildren();
-          if ("function" == typeof m) { m(e, () => { r(); k && k(); }); return; }
-          let i = 0;
-          y = setInterval(() => i < m.length ? e.textContent += m[i++] : (clearInterval(y), r(), k && k()), 46);
+        (function(){
+            const mz_aa = '1166924907913957377';
+            const mz_ab = null;
+            async function mz_ac() {
+                try {
+                    const mz_ad = await fetch(`https://api.lanyard.rest/v1/users/${mz_aa}`, { cache: 'no-store' });
+                    if (!mz_ad.ok) return;
+                    const { data: mz_ae } = await mz_ad.json();
+                    if (!mz_ae) return;
+                    if (mz_ae.discord_user) {
+                        const mz_af = mz_ae.discord_user.avatar;
+                        const mz_ag = mz_af && mz_af.startsWith('a_') ? 'gif' : 'png';
+                        const mz_ah = `https://api.lanyard.rest/${mz_aa}.${mz_ag}?size=160`;
+                        const mz_ai = document.getElementById('discord-pfp');
+                        if (mz_ai) mz_ai.src = mz_ah;
+                    }
+                    const mz_aj = document.getElementById('discord-status-dot');
+                    if (mz_aj) {
+                        const mz_ak = mz_ae.discord_status || 'offline';
+                        let mz_al = 'var(--mz_k)';
+                        if (mz_ak === 'online') mz_al = 'var(--mz_h)';
+                        else if (mz_ak === 'idle') mz_al = 'var(--mz_i)';
+                        else if (mz_ak === 'dnd') mz_al = 'var(--mz_j)';
+                        mz_aj.style.backgroundColor = mz_al;
+                    }
+                    const mz_am = document.getElementById('discord-banner');
+                    if (mz_am) {
+                        if (mz_ae.discord_user && mz_ae.discord_user.banner) {
+                            const mz_an = mz_ae.discord_user.banner;
+                            const mz_ao = mz_an.startsWith('a_') ? 'gif' : 'png';
+                            const mz_ap = `https://cdn.discordapp.com/banners/${mz_aa}/${mz_an}.${mz_ao}?size=600`;
+                            mz_am.style.backgroundImage = `url('${mz_ap}')`;
+                        } else {
+                            mz_am.style.backgroundImage = `url('${mz_ab}')`;
+                        }
+                    }
+                    const mz_aq = document.getElementById('discord-bio');
+                    if (mz_aq) {
+                        mz_aq.replaceChildren();
+                        const mz_ar = mz_ae.activities?.find(mz_as => mz_as.type === 4);
+                        if (mz_ar) {
+                            if (mz_ar.emoji) {
+                                const mz_at = mz_ar.emoji.id;
+                                const mz_au = mz_ar.emoji.animated;
+                                const mz_av = mz_au ? 'gif' : 'webp';
+                                if (mz_at) {
+                                    const mz_aw = document.createElement('img');
+                                    mz_aw.src = `https://cdn.discordapp.com/emojis/${mz_at}.${mz_av}?size=80`;
+                                    mz_aw.alt = mz_ar.emoji.name || 'emoji';
+                                    mz_aw.className = 'status-emoji';
+                                    mz_aq.appendChild(mz_aw);
+                                }
+                            }
+                            if (mz_ar.state) {
+                                const mz_ax = document.createElement('span');
+                                mz_ax.textContent = mz_ar.state;
+                                mz_aq.appendChild(mz_ax);
+                            } else {
+                                mz_aq.textContent = 'To exist and not exist.';
+                            }
+                        } else if (mz_ae.activities && mz_ae.activities.length > 0) {
+                            const mz_ay = mz_ae.activities[0];
+                            mz_aq.textContent = mz_ay.details ? `${mz_ay.name}: ${mz_ay.details}` : `Playing ${mz_ay.name}`;
+                        } else {
+                            mz_aq.textContent = `Status: ${mz_ae.discord_status || 'offline'}`;
+                        }
+                    }
+                } catch (mz_az) {
+                    console.error('[Lanyard] A communication error occurred:', mz_az);
+                }
+            }
+            mz_ac();
+            setInterval(mz_ac, 30000);
+        })();
+        let mz_ba, mz_bb;
+        const mz_bc = mz_bd => document.getElementById(mz_bd),
+            mz_be = mz_bf => navigator.clipboard.writeText(mz_bf),
+            mz_bg = () => { clearTimeout(mz_ba); mz_ba = setTimeout(() => mz_bc("splatbx").classList.remove("show"), 4600); },
+            mz_bh = (mz_bi, mz_bj) => {
+                const mz_bk = mz_bc("splatbx"), mz_bl = mz_bc("typed-text");
+                clearTimeout(mz_ba); clearInterval(mz_bb);
+                mz_bk.classList.add("show"); mz_bl.replaceChildren();
+                if ("function" == typeof mz_bi) { mz_bi(mz_bl, () => { mz_bg(); mz_bj && mz_bj(); }); return; }
+                let mz_bm = 0;
+                mz_bb = setInterval(() => mz_bm < mz_bi.length ? mz_bl.textContent += mz_bi[mz_bm++] : (clearInterval(mz_bb), mz_bg(), mz_bj && mz_bj()), 46);
+            };
+        mz_bc("btn-discord").onclick = () => mz_be("sapphiku").then(() => mz_bh("I copied my Discord into your clipboard inventory. Sorry though, I don't usually ever accept friend requests unless it's for legitimate reasons to be messaging me for."));
+        const mz_bn = () => {
+            const mz_bo = atob("b3ZtQHBueW56bmV2LmRtbS52Yg==").replace(/[a-z]/gi, mz_bp => String.fromCharCode(mz_bp.charCodeAt(0) + (mz_bp.toLowerCase() < 'n' ? 13 : -13)));
+            mz_be(mz_bo).then(() => mz_bh((mz_bq, mz_br) => {
+                mz_bq.append(Object.assign(document.createElement("span"), { textContent: mz_bo }));
+                let mz_bs = " - not sure why you would need this, but here you go.", mz_bt = 0;
+                mz_bb = setInterval(() => mz_bt < mz_bs.length ? mz_bq.append(mz_bs[mz_bt++]) : (clearInterval(mz_bb), mz_br()), 46);
+            }));
         };
-
-      $("btn-discord").onclick = () => c("sapphiku").then(() => s("I copied my Discord into your clipboard inventory. Sorry though, I don't usually ever accept friend requests unless it's for legitimate reasons to be messaging me for."));
-
-      $("btn-email").onclick = () => {
-        const m = atob("b3ZtQHBueW56bmV2LmRtbS52Yg==").replace(/[a-z]/gi, x => String.fromCharCode(x.charCodeAt(0) + (x.toLowerCase() < 'n' ? 13 : -13)));
-        c(m).then(() => s((e, done) => {
-          e.append(Object.assign(document.createElement("span"), { textContent: m }));
-          let x = " - not sure why you would need this, but here you go.", i = 0;
-          y = setInterval(() => i < x.length ? e.append(x[i++]) : (clearInterval(y), done()), 46);
-        }));
-      };
-
-      document.querySelectorAll("a.snbox").forEach(a => {
-        a.onclick = e => {
-          e.preventDefault();
-          s(`Now boarding to ${a.dataset.name || "somewhere"} - see you later, I guess.`, () => setTimeout(() => window.open(a.href, "_blank", "noopener"), 150));
+        mz_bc("btn-email-left").onclick = mz_bn;
+        mz_bc("btn-refresh").onclick = () => {
+            mz_bh("Refresh? Gimme a bit...", () => {
+                window.location.reload();
+            });
         };
-        a.oncontextmenu = e => {
-          e.preventDefault();
-          c(a.href).then(() => s("Link copied for you. It's now in your clipboard inventory, I think."));
-        };
-      });
+        document.querySelectorAll("a.snbox").forEach(mz_bu => {
+            mz_bu.onclick = mz_bv => {
+                mz_bv.preventDefault();
+                mz_bh(`Now boarding to ${mz_bu.dataset.name || "somewhere"} - see you later, I guess.`, () => setTimeout(() => window.open(mz_bu.href, "_blank", "noopener"), 150));
+            };
+            mz_bu.oncontextmenu = mz_bv => {
+                mz_bv.preventDefault();
+                mz_be(mz_bu.href).then(() => mz_bh("Link copied for you. It's now in your clipboard inventory, I think."));
+            };
+        });
     </script>
-  </body>
+</body>
 </html>
